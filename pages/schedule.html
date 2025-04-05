@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Schedule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/schedule.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-blue-600">Student Portal</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-700">Welcome, <span id="userEmail" class="font-medium"></span></span>
+                    <button onclick="logout()" class="text-sm text-blue-600 hover:text-blue-500">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Sidebar Navigation -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <nav>
+                    <ul class="space-y-2">
+                        <li><a href="../dashboard.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Dashboard</a></li>
+                        <li><a href="schedule.html" class="block px-4 py-2 text-blue-600 font-medium rounded hover:bg-blue-50">Schedule</a></li>
+                        <li><a href="grades.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Grades</a></li>
+                        <li><a href="announcements.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Announcements</a></li>
+                        <li><a href="attendance.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Attendance</a></li>
+                        <li><a href="profile.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Schedule Content -->
+            <div class="md:col-span-3">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Weekly Schedule</h2>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded">Week</button>
+                            <button class="px-3 py-1 bg-gray-100 text-gray-600 rounded">Month</button>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Table -->
+                    <div class="overflow-x-auto">
+                        <table class="schedule-table min-w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monday</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tuesday</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wednesday</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thursday</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 8:00 AM -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">8:00 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-math">
+                                            <p class="text-sm font-medium">Mathematics</p>
+                                            <p class="text-xs">Room 201</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-science">
+                                            <p class="text-sm font-medium">Science</p>
+                                            <p class="text-xs">Lab 3</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-history">
+                                            <p class="text-sm font-medium">History</p>
+                                            <p class="text-xs">Room 105</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- 10:00 AM -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">10:00 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-english">
+                                            <p class="text-sm font-medium">English</p>
+                                            <p class="text-xs">Room 302</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-pe">
+                                            <p class="text-sm font-medium">PE</p>
+                                            <p class="text-xs">Gym</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-cs">
+                                            <p class="text-sm font-medium">Computer Science</p>
+                                            <p class="text-xs">Lab 1</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                </tr>
+                                <!-- 12:00 PM -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12:00 PM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap" colspan="5">
+                                        <div class="bg-gray-100 p-2 rounded text-center">
+                                            <p class="text-sm font-medium text-gray-800">Lunch Break</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- 1:00 PM -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1:00 PM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-math">
+                                            <p class="text-sm font-medium">Mathematics</p>
+                                            <p class="text-xs">Room 201</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-art">
+                                            <p class="text-sm font-medium">Art</p>
+                                            <p class="text-xs">Room 401</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="subject-card subject-science">
+                                            <p class="text-sm font-medium">Science</p>
+                                            <p class="text-xs">Lab 3</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        // Display user email
+        document.getElementById('userEmail').textContent = localStorage.getItem('userEmail') || 'Student';
+    </script>
+</body>
+</html>

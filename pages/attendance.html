@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Attendance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-blue-600">Student Portal</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-700">Welcome, <span id="userEmail" class="font-medium"></span></span>
+                    <button onclick="logout()" class="text-sm text-blue-600 hover:text-blue-500">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Sidebar Navigation -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <nav>
+                    <ul class="space-y-2">
+                        <li><a href="../dashboard.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Dashboard</a></li>
+                        <li><a href="schedule.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Schedule</a></li>
+                        <li><a href="grades.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Grades</a></li>
+                        <li><a href="announcements.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Announcements</a></li>
+                        <li><a href="attendance.html" class="block px-4 py-2 text-blue-600 font-medium rounded hover:bg-blue-50">Attendance</a></li>
+                        <li><a href="profile.html" class="block px-4 py-2 text-gray-700 rounded hover:bg-blue-50">Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Attendance Content -->
+            <div class="md:col-span-3">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Attendance Records</h2>
+                    
+                    <!-- Attendance Summary -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Overall Attendance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-medium text-green-800">Present</h4>
+                                <p class="text-2xl font-bold text-green-600">87%</p>
+                                <p class="text-xs text-green-600">of total classes</p>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-medium text-red-800">Absent</h4>
+                                <p class="text-2xl font-bold text-red-600">8%</p>
+                                <p class="text-xs text-red-600">of total classes</p>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-medium text-yellow-800">Late</h4>
+                                <p class="text-2xl font-bold text-yellow-600">5%</p>
+                                <p class="text-xs text-yellow-600">of total classes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Trend Chart -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Monthly Attendance Trend</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <canvas id="attendanceChart" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Subject-wise Attendance -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Subject-wise Attendance</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Classes</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Present</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Absent</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Late</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Mathematics</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">45</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-bold">40</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-bold">3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-bold">2</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 89%"></div>
+                                                </div>
+                                                <span class="ml-2 text-sm font-medium text-gray-700">89%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Science</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">42</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-bold">36</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-bold">4</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-bold">2</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 86%"></div>
+                                                </div>
+                                                <span class="ml-2 text-sm font-medium text-gray-700">86%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">English</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-bold">35</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-bold">5</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-bold">0</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 88%"></div>
+                                                </div>
+                                                <span class="ml-2 text-sm font-medium text-gray-700">88%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">History</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">38</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-bold">33</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-bold">3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-bold">2</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 87%"></div>
+                                                </div>
+                                                <span class="ml-2 text-sm font-medium text-gray-700">87%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        // Display user email
+        document.getElementById('userEmail').textContent = localStorage.getItem('userEmail') || 'Student';
+
+        // Initialize attendance chart
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Attendance Percentage',
+                    data: [85, 82, 88, 90, 87, 89],
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 70,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
